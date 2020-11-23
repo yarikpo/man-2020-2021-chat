@@ -1,0 +1,27 @@
+{
+  "name": "man-2020-2021-chat",
+  "version": "1.0.0",
+  "main": "app.js",
+  "author": "yarikpo <yaroslavpopovich04@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "server": "node app.js",
+    "dev-server": "nodemon app.js",
+    "client": "cd client && yarn start && cd ..",
+    "start": "concurrently \"yarn run server\" \"yarn run client\"",
+    "dev": "concurrently \"yarn run dev-server\" \"yarn run client\""
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "config": "^3.3.2",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.10.14",
+    "uuid": "^8.3.1"
+  },
+  "devDependencies": {
+    "concurrently": "^5.3.0",
+    "nodemon": "^2.0.6"
+  }
+}
