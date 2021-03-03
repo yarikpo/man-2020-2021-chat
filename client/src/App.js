@@ -34,7 +34,7 @@ class App extends React.Component {
       <>
         <Header handleChangeAuthorized={this.handleChangeAuthorized} authorized={this.state.authorized} />
         <Switch>
-          <Route exact path='/' render={() => <Home authorized={this.state.authorized} />} />
+          <Route exact path='/' render={() => <Home authorized={this.state.authorized} handleChangeAuthorized={this.handleChangeAuthorized} />} />
           <Route path='/login' render={() => <Login authorized={this.state.authorized} handleChangeAuthorized={this.handleChangeAuthorized} />} />
           <Route path='/register' render={() => <Register authorized={this.state.authorized} handleChangeAuthorized={this.handleChangeAuthorized} />} />
         </Switch>

@@ -1,5 +1,5 @@
 GET http://localhost:3001/api/posts
-Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiWWFyaWsiLCJwYXNzd29yZCI6IjEyMyIsImlhdCI6MTYwNjA1NDExMywiZXhwIjoxNjA2MDU0MTM4fQ.4IncnrDUOn6OfcLQ9_RkhvgiNvs6bA7s5QUILke3FEw
+Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiWWFyaWsiLCJwYXNzd29yZCI6IjEyMyIsImlhdCI6MTYxNDc2OTczMSwiZXhwIjoxNjE0NzY5NzU2fQ.M8JkUxqgRDpScgVJdD9mAo4AcilBlgqqGxgxu110QEc
 
 ###
 
@@ -7,7 +7,7 @@ POST http://localhost:3001/api/login
 Content-Type: application/json
 
 {
-    "username": "qwe",
+    "username": "Yarik",
     "password": "123"
 }
 

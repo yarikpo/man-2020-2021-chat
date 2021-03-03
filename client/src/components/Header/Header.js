@@ -31,11 +31,16 @@ class Header extends React.Component {
     }
 
     const response = await getData('http://localhost:3001/api/posts', localStorage.getItem('accessToken'))
-      .then(response => response.json());
+      .then(response => response.json())
+      .catch(err => console.log(err));
 
-    console.log(response[0]);
-    const name = response[0].username;
-    console.log(name)
+    try {
+      console.log(response[0]);
+      const name = response[0].username;
+      console.log(name)
+    } catch (e) {
+      console.log(e);
+    }
     // this.props.handleChangeAuthorized(true);
   }
 

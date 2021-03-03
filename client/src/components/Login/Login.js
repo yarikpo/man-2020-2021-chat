@@ -1,12 +1,14 @@
 import React from 'react';
 import './Login.css';
 import keyboard from './keyboard.jpeg';
+import { Redirect } from 'react-router-dom';
 
 class Login extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
+            authorized: false,
             nickname: '',
             password: '',
         };
@@ -53,7 +55,38 @@ class Login extends React.Component {
         e.preventDefault();
     }
 
+    async componentDidMount() {
+        
+        async function getData(url) {
+            const response = await fetch(url, {
+                method: 'GET',
+                mode: 'cors',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
+                }
+            });
+            return await response.json();
+        }
+
+        getData('http://localhost:3001/api/posts')
+            .then(data => {
+                console.log(data);
+                if (data.length > 0) {
+                    this.setState({ authorized: true });
+                    this.props.handleChangeAuthorized(true);
+                }
+            })
+            .catch(err => {
+                console.log(err);
+                this.setState({ authorized: false });
+                this.props.handleChangeAuthorized(false);
+            });
+    }
+
+
     render() {
+        if (this.state.authorized === true) return <Redirect to='/' />;
         return(
             <div className='login-page'>
                 <img src={keyboard} alt='keyboard' />
