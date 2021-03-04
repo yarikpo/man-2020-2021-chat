@@ -10,6 +10,8 @@ class Header extends React.Component {
     this.state = {
       nickname: '',
     };
+
+    this.handleSignOut = this.handleSignOut.bind(this);
   }
 
   async componentDidMount() {
@@ -44,11 +46,45 @@ class Header extends React.Component {
     // this.props.handleChangeAuthorized(true);
   }
 
+  handleSignOut(e) {
+    console.log('out');
+    async function deleteData(url) {
+      try {
+        const response = fetch(url, {
+          'Content-Type': 'application/json',
+          'method': 'DELETE',
+          'mode': 'cors',
+          'body': {
+            token: localStorage.getItem('refreshToken')
+          }
+        });
+        return await response;
+      } catch (e) {
+        console.log(e);
+      }
+    }
+
+    const response =  deleteData('http://localhost:3001/api/logout')
+      .then(response => response.json())
+      .catch(err => console.log(err));
+
+    
+
+    try {
+      console.log(response);
+      localStorage.clear();
+    } catch (e) {
+      console.log(e);
+    }
+
+  }
+
   render() {
     return (
       <header>
         <ul>
             <li><Link to='/'>Home</Link></li>
+            {this.props.authorized === true ? <li className='right'><Link to='/login' onClick={this.handleSignOut}>Sign out</Link></li> : '' }
             {this.props.authorized === false ? <li className='right'><Link to='/login'>Sign In</Link></li> : '' }
             {this.props.authorized === false ? <li className='right'><Link to='/register'>Sign Up</Link></li> : ''}
             {this.props.authorized === true ? <li className='right'><Link to='/profile'><img src={userLogo} alt='user-logo' /></Link></li> : ''}
