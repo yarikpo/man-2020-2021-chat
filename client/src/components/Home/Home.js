@@ -1,6 +1,7 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 import './Home.css';
+import GoogleLogin from 'react-google-login';
 
 class Home extends React.Component {
     constructor(props) {
@@ -42,13 +43,27 @@ class Home extends React.Component {
             });
     }
 
+    responseGoogle(response) {
+        console.log(response);
+        console.log(response.profileObj);
+    }
+
     render() {
         if (this.state.authorized === false) return <Redirect to='/login' />;
         return(
             <div className='home-page'>
-                name: { this.state.data.username }
+                <span className='home-name'>{ this.state.data.username }</span>
                 <br />
-                title: { this.state.data.title }
+                <GoogleLogin 
+                    className='google-login'
+                    clientId='3479913194-a82j7al6q90o0b6i2orp79pk3qvp0tvj.apps.googleusercontent.com'
+                    buttonText='Login'
+                    onSuccess={this.responseGoogle}
+                    onFailure={this.responseGoogle}
+                    cookiePolicy={'single_host_origin'}
+                />
+                <br />
+                email: { this.state.data.email }
             </div>
         );
     }

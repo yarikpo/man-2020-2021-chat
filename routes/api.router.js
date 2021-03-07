@@ -8,11 +8,13 @@ const posts = [
     {
         username: 'Yarik',
         password: '123',
+        email: 'yarik@gmail.com',
         title: 'Post 1'
     },
     {
         username: 'Boris',
         password: '111',
+        email: 'boris@gmail.com',
         title: 'Post 2'
     }
 ];
