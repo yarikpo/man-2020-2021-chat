@@ -2,6 +2,7 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import './Home.css';
 import GoogleLogin from 'react-google-login';
+import DriveFiles from '../DriveFiles/DriveFiles';
 
 class Home extends React.Component {
     constructor(props) {
@@ -64,6 +65,8 @@ class Home extends React.Component {
                 />
                 <br />
                 email: { this.state.data.email }
+                <br />
+                <DriveFiles />
             </div>
         );
     }
