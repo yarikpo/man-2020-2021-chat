@@ -84,7 +84,7 @@ router.post('/token', (req, res) => {
 });
 
 function generateToken(user) {
-    return jwt.sign(user, config.get('ACCESS_TOKEN_SECRET'), { expiresIn: '25s' });
+    return jwt.sign(user, config.get('ACCESS_TOKEN_SECRET'), { expiresIn: '60s' });
 }
 
 function authenticateToken(req, res, next) {

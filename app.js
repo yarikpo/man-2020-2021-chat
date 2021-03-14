@@ -1,6 +1,7 @@
 const express = require('express');
 const config = require('config');
 const routes = require('./routes/api.router');
+const driveFiles = require('./routes/driveFiles.router');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 
@@ -13,6 +14,7 @@ app.use(bodyParser.json());
 
 app.use(express.json());
 app.use('/api/', routes);
+app.use('/drive/', driveFiles);
 
 
 async function start() {
