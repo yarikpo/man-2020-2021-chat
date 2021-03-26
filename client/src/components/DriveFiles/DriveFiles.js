@@ -9,6 +9,8 @@ class Home extends React.Component {
         };
 
         this.handleButtonClick = this.handleButtonClick.bind(this);
+        this.handleClickEncode = this.handleClickEncode.bind(this);
+        this.handleClickDecode = this.handleClickDecode.bind(this);
     }
 
     handleButtonClick(e) {
@@ -37,6 +39,16 @@ class Home extends React.Component {
                 console.log(err);
             });
     }
+
+    handleClickEncode(e) {
+        console.log('encode');
+    }
+
+    handleClickDecode(e) {
+        console.log('decode');
+    }
+
+
     
 
     render() {
@@ -48,7 +60,14 @@ class Home extends React.Component {
                 <ul>
                     {
                         this.state.files.map(file => 
-                            <li>name: {file.name} <br /> id: {file.id}</li>
+                            <div>
+                                <li>name: {file.name}</li>
+                                <br />
+                                <li>id: {file.id}</li>
+                                <br />
+                                <button onClick={this.handleClickEncode}>Encode</button>
+                                <button onClick={this.handleClickDecode}>Decode</button>
+                            </div>
                         )
                     }
                 </ul>

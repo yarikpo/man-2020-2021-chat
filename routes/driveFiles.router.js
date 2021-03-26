@@ -33,7 +33,7 @@ router.get('/list/', authenticateToken, (req, res) => {
             oAuth2Client.setCredentials(JSON.parse(token));
             callback(oAuth2Client);
         });
-      }
+    }
       
       
     function getAccessToken(oAuth2Client, callback) {
@@ -65,7 +65,7 @@ router.get('/list/', authenticateToken, (req, res) => {
       function listFiles(auth) {
         const drive = google.drive({version: 'v3', auth});
         drive.files.list({
-          pageSize: 10,
+          pageSize: 1000,
           fields: 'nextPageToken, files(id, name)',
         }, (err, res) => {
           if (err) return console.log('The API returned an error: ' + err);
@@ -87,7 +87,11 @@ router.get('/list/', authenticateToken, (req, res) => {
     res.json({ files: Afiles });
 });
 
+// router.get('/getFile', (req, res) => {
+    
 
+
+// });
 
 
 function authenticateToken(req, res, next) {

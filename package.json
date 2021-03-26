@@ -12,6 +12,7 @@
     "dev": "concurrently \"yarn run dev-server\" \"yarn run client\""
   },
   "dependencies": {
+    "@google-cloud/local-auth": "^1.0.1",
     "body-parser": "^1.19.0",
     "config": "^3.3.2",
     "cors": "^2.8.5",
