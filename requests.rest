@@ -34,3 +34,14 @@ Content-Type: application/json
 
 GET http://localhost:3001/drive/list 
 Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiWWFyaWsiLCJwYXNzd29yZCI6IjEyMyIsImlhdCI6MTYxNTcyMjY1MywiZXhwIjoxNjE1NzIyNzEzfQ.GOwrO0wYCu8hDyMkPf5rkFEAbKfYoAZIFsR6MwiQWyQ
+
+
+###
+
+POST http://localhost:3001/drive/getFile
+Content-Type: application/json
+
+# Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiWWFyaWsiLCJwYXNzd29yZCI6IjEyMyIsImlhdCI6MTYxNjg2MTIzNSwiZXhwIjoxNjE2ODYxMjk1fQ.DXKnbFSIeuTbRMo0c9-vGHrHyFiadsswKrcaIUZvPc4
+{
+    "fileId": "1-1cBqIVaz8KCU9JItFqe-CGgKK-vcdE9"
+}

@@ -6,6 +6,10 @@ const config = require('config');
 const fs = require('fs');
 const readline = require('readline');
 const {google} = require('googleapis');
+const os = require('os');
+const path = require('path');
+
+const googleDownload = require('../google-drive');
 
 var Afiles = [];
 
@@ -87,11 +91,26 @@ router.get('/list/', authenticateToken, (req, res) => {
     res.json({ files: Afiles });
 });
 
-// router.get('/getFile', (req, res) => {
-    
+// /drive/getFile
+router.post('/getFile', async (req, res) => {
+    const fileId = req.body.fileId;
+    googleDownload(fileId);
 
+    const file = path.join(os.tmpdir(), `google-download-${fileId}`);
+    console.log(`FILEPATH: ${file}`);
 
-// });
+    fs.readFile(file, 'utf8', function(err, data) {
+        if (err) throw err;
+        console.log('OK: ' + file);
+        console.log(data);
+
+        res.json({data: data});
+    }).catch(err => console.log(err));
+
+    console.log(fileId);
+
+    res.json({id: fileId});
+});
 
 
 function authenticateToken(req, res, next) {
