@@ -5,12 +5,14 @@ class Home extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            files: []
+            files: [],
+            text: []
         };
 
         this.handleButtonClick = this.handleButtonClick.bind(this);
         this.handleClickEncode = this.handleClickEncode.bind(this);
         this.handleClickDecode = this.handleClickDecode.bind(this);
+        this.handleClickWrite = this.handleClickWrite.bind(this);
     }
 
     handleButtonClick(e) {
@@ -48,6 +50,40 @@ class Home extends React.Component {
         console.log('decode');
     }
 
+    handleClickWrite(e) {
+        console.log('write');
+        console.log(e);
+
+        async function getData(url) {
+            const response = await fetch(url, {
+                method: 'POST',
+                mode: 'cors',
+                headers: {
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+                    'Access-Control-Allow-Headers': '*',
+                    'Status': '200 OK',
+                    'Vary': 'Accept',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
+                    'fieldId': e.id
+                })
+            });
+            return await response.json();
+        }
+
+        getData('http://localhost:3001/drive/getFile').then(data => {
+            console.log(data);
+            let t = this.state.text;
+            t[e.id] = data.data;
+            this.setState({ text: t });  
+        }).catch(err => {
+            console.log(err);
+        });
+    }
+
 
     
 
@@ -65,8 +101,11 @@ class Home extends React.Component {
                                 <br />
                                 <li>id: {file.id}</li>
                                 <br />
+                                <button onClick={() => this.handleClickWrite({id: file.id})}>write data</button>
                                 <button onClick={this.handleClickEncode}>Encode</button>
                                 <button onClick={this.handleClickDecode}>Decode</button>
+                                <p></p>
+                                <br />
                             </div>
                         )
                     }

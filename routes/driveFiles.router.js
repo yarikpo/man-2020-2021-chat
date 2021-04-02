@@ -92,7 +92,12 @@ router.get('/list/', authenticateToken, (req, res) => {
 });
 
 // /drive/getFile
-router.post('/getFile', async (req, res) => {
+router.post('/getFile', authenticateToken, async (req, res) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader("Access-Control-Allow-Headers", "Authorization, Cache-Control, Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
+    res.setHeader('Access-Control-Allow-Headers', '*');
+
+
     const fileId = req.body.fileId;
     googleDownload(fileId);
 
@@ -109,12 +114,12 @@ router.post('/getFile', async (req, res) => {
 
     console.log(fileId);
 
-    res.json({id: fileId});
+    res.json({id: fileId, data: null});
 });
 
 
 function authenticateToken(req, res, next) {
-    const authHeader = req.headers['authorization'];
+    const authHeader = req.body.Authorization || req.headers['authorization'];
     console.log(authHeader);
     const token = authHeader && authHeader.split(' ')[1];
     
