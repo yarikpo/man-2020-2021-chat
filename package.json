@@ -7,9 +7,9 @@
   "scripts": {
     "server": "node app.js",
     "dev-server": "nodemon app.js",
-    "client": "cd client && yarn start && cd ..",
-    "start": "concurrently \"yarn run server\" \"yarn run client\"",
-    "dev": "concurrently \"yarn run dev-server\" \"yarn run client\""
+    "client": "cd client && npm run start && cd ..",
+    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "dev": "concurrently \"npm run dev-server\" \"npm run client\""
   },
   "dependencies": {
     "@google-cloud/local-auth": "^1.0.1",
@@ -19,7 +19,7 @@
     "express": "^4.17.1",
     "googleapis": "39",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.10.14",
+    "mongoose": "^5.12.3",
     "react-google-login": "^5.2.2",
     "uuid": "^8.3.1"
   },

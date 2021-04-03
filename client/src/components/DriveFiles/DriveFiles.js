@@ -59,16 +59,11 @@ class Home extends React.Component {
                 method: 'POST',
                 mode: 'cors',
                 headers: {
-                    'Access-Control-Allow-Origin': '*',
-                    'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-                    'Access-Control-Allow-Headers': '*',
-                    'Status': '200 OK',
-                    'Vary': 'Accept',
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
                     'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
-                    'fieldId': e.id
+                    'fileId': e.id
                 })
             });
             return await response.json();
@@ -104,7 +99,7 @@ class Home extends React.Component {
                                 <button onClick={() => this.handleClickWrite({id: file.id})}>write data</button>
                                 <button onClick={this.handleClickEncode}>Encode</button>
                                 <button onClick={this.handleClickDecode}>Decode</button>
-                                <p></p>
+                                <p>{this.state.text[file.id] ? this.state.text[file.id] : 'NULL'}</p>
                                 <br />
                             </div>
                         )

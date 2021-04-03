@@ -93,28 +93,34 @@ router.get('/list/', authenticateToken, (req, res) => {
 
 // /drive/getFile
 router.post('/getFile', authenticateToken, async (req, res) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader("Access-Control-Allow-Headers", "Authorization, Cache-Control, Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
-    res.setHeader('Access-Control-Allow-Headers', '*');
+    console.log(`req.body.fileId: ${req.body.fileId}`);
+
+    // res.setHeader('Access-Control-Allow-Origin', '*');
+    // res.setHeader("Access-Control-Allow-Headers", "Authorization, Cache-Control, Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
+    // res.setHeader('Access-Control-Allow-Headers', '*');
 
 
     const fileId = req.body.fileId;
-    googleDownload(fileId);
 
-    const file = path.join(os.tmpdir(), `google-download-${fileId}`);
-    console.log(`FILEPATH: ${file}`);
+    try {
+        googleDownload(fileId);
 
-    fs.readFile(file, 'utf8', function(err, data) {
-        if (err) throw err;
-        console.log('OK: ' + file);
-        console.log(data);
+        const file = path.join(os.tmpdir(), `google-download-${fileId}`);
+        console.log(`FILEPATH: ${file}`);
 
-        res.json({data: data});
-    }).catch(err => console.log(err));
+        fs.readFile(file, 'utf8', function(err, data) {
+            // if (err) throw err;
+            console.log('OK: ' + file);
+            console.log(data);
 
-    console.log(fileId);
+            res.status(200).json({data: data});
+        });
+    } catch(e) {
 
-    res.json({id: fileId, data: null});
+        console.log(`something wrong: ${e}`);
+
+        res.status(502).json({id: fileId, data: null});
+    }
 });
 
 
