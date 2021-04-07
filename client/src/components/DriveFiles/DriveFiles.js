@@ -44,6 +44,36 @@ class Home extends React.Component {
 
     handleClickEncode(e) {
         console.log('encode');
+        console.log(e);
+
+        async function postData(url, data={}) {
+            const response = await fetch(url, {
+                method: data.method,
+                mode: 'cors',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+            return await response.json();
+        }
+
+        let data = {
+            method: 'DELETE',
+            code: 'enc',
+            fileId: e.id,
+        }
+
+        postData('http://localhost:3001/drive/deleteAFile', data).catch(err => console.log(err));
+
+        data = {
+            method: 'POST',
+            filename: e.name,
+            fileId: e.id,
+        }
+
+        postData('http://localhost:3001/drive/upload', data).catch(err => console.log(err));
+
     }
 
     handleClickDecode(e) {
@@ -97,7 +127,7 @@ class Home extends React.Component {
                                 <li>id: {file.id}</li>
                                 <br />
                                 <button onClick={() => this.handleClickWrite({id: file.id})}>write data</button>
-                                <button onClick={this.handleClickEncode}>Encode</button>
+                                <button onClick={() => this.handleClickEncode({id: file.id, name: file.name})}>Encode</button>
                                 <button onClick={this.handleClickDecode}>Decode</button>
                                 <p>{this.state.text[file.id] ? this.state.text[file.id] : 'NULL'}</p>
                                 <br />

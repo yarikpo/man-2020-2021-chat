@@ -33,7 +33,7 @@ Content-Type: application/json
 ###
 
 GET http://localhost:3001/drive/list 
-Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiWWFyaWsiLCJwYXNzd29yZCI6IjEyMyIsImlhdCI6MTYxNzM5MDY2OCwiZXhwIjoxNjE3MzkwNzI4fQ.Nd877nhJppcQXqzDTwb_OJrizmInBMbf7fB2Ij-pe0o
+Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiWWFyaWsiLCJwYXNzd29yZCI6IjEyMyIsImlhdCI6MTYxNzgyMDE1NSwiZXhwIjoxNjE3ODIwMjE1fQ.XduMxEyMDWwaCGrstzFbGl5fWlSDHMlgGEzmPK6w6hE
 
 
 ###
@@ -45,4 +45,34 @@ Content-Type: application/json
 {
     "fileId": "1-1cBqIVaz8KCU9JItFqe-CGgKK-vcdE9",
     "Authorization":  "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiWWFyaWsiLCJwYXNzd29yZCI6IjEyMyIsImlhdCI6MTYxNzQ1MjczOCwiZXhwIjoxNjE3NDUyNzk4fQ.r87Uht7rTS48xc-u9jOzZhVPIjZXwvMkCxVrj8-f-2Q"
+}
+
+
+###
+
+POST https://www.googleapis.com/upload/drive/v3/files?uploadType=media
+Content-Type: application/json
+
+{
+    "body": "HEHEHHEHEHEHEHHEHE)))"
+}
+
+
+###
+
+DELETE http://localhost:3001/drive/deleteAFile
+Content-Type: application/json
+
+{
+    "fileId": "1_X1psYHHyFBA4VmzWLJ1ZgEiFKYe3R18"
+}
+
+###
+
+POST http://localhost:3001/drive/upload
+Content-Type: application/json
+
+{
+    "filename": "new-test-google.txt",
+    "fileId": "1FDIbr2uu-zU2PhfhQe34PMTDYRts3dzn"
 }
