@@ -78,6 +78,35 @@ class Home extends React.Component {
 
     handleClickDecode(e) {
         console.log('decode');
+        console.log(e);
+
+        async function postData(url, data={}) {
+            const response = await fetch(url, {
+                method: data.method,
+                mode: 'cors',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+            return await response.json();
+        }
+
+        let data = {
+            method: 'DELETE',
+            code: 'enc',
+            fileId: e.id,
+        }
+
+        postData('http://localhost:3001/drive/deleteAFile', data).catch(err => console.log(err));
+
+        data = {
+            method: 'POST',
+            filename: e.name,
+            fileId: e.id,
+        }
+
+        postData('http://localhost:3001/drive/upload', data).catch(err => console.log(err));
     }
 
     handleClickWrite(e) {
@@ -128,7 +157,8 @@ class Home extends React.Component {
                                 <br />
                                 <button onClick={() => this.handleClickWrite({id: file.id})}>write data</button>
                                 <button onClick={() => this.handleClickEncode({id: file.id, name: file.name})}>Encode</button>
-                                <button onClick={this.handleClickDecode}>Decode</button>
+                                <button onClick={() => this.handleClickDecode({id: file.id, name: file.name})}>Decode</button>
+                                <a href='http://localhost:3001/drive'>login</a>
                                 <p>{this.state.text[file.id] ? this.state.text[file.id] : 'NULL'}</p>
                                 <br />
                             </div>

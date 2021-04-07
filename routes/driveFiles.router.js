@@ -140,12 +140,20 @@ router.post('/upload', (req, res) => {
     fileId = req.body.fileId;
     filePath = path.join(os.tmpdir(), `google-download-${fileId}`);
 
-    const upload = require('../google/upload.js');
-    upload(filename, filePath);
+
+    const editFile = require('edit-file');
+    editFile(filePath, text => text.split('').reverse().join(''), err => {
+        if (err) throw(err);
+        const upload = require('../google/upload.js');
+        upload(filename, filePath);
+        res.status(200);
+    });
+
+    
     
   
 
-  res.status(200);
+  
   
 });
 

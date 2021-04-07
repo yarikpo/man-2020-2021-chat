@@ -17,6 +17,7 @@
     "config": "^3.3.2",
     "cors": "^2.8.5",
     "crypto": "^1.0.1",
+    "edit-file": "^0.3.0",
     "express": "^4.17.1",
     "gapi": "^0.0.3",
     "google-apis": "^1.0.0",
